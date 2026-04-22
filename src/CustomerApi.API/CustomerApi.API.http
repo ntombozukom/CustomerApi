@@ -1,0 +1,59 @@
+@CustomerApi.API_HostAddress = http://localhost:5104
+@auth = Basic YWRtaW46c2VjcmV0MTIz
+
+### Create customer
+POST {{CustomerApi.API_HostAddress}}/api/v1/customers
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+  "firstName": "Alice",
+  "lastName": "May",
+  "email": "alicemay@example.com",
+  "age": 30
+}
+
+###
+
+### Get customer by ID  (replace guid after creating)
+GET {{CustomerApi.API_HostAddress}}/api/v1/customers/00000000-0000-0000-0000-000000000000
+Accept: application/json
+Authorization: {{auth}}
+
+###
+
+### Get all customers (no filter)
+GET {{CustomerApi.API_HostAddress}}/api/v1/customers
+Accept: application/json
+Authorization: {{auth}}
+
+###
+
+### Get all customers (filter by first name)
+GET {{CustomerApi.API_HostAddress}}/api/v1/customers?firstName=Ntombozuko&page=1&pageSize=10
+Accept: application/json
+Authorization: {{auth}}
+
+###
+
+### Update customer  (replace guid)
+PUT {{CustomerApi.API_HostAddress}}/api/v1/customers/00000000-0000-0000-0000-000000000000
+Accept: application/json
+Content-Type: application/json
+Authorization: {{auth}}
+
+{
+  "firstName": "Ntombozuko",
+  "lastName": "Malanti",
+  "email": "updated@example.com",
+  "age": 31
+}
+
+###
+
+### Delete customer  (replace guid)
+DELETE {{CustomerApi.API_HostAddress}}/api/v1/customers/00000000-0000-0000-0000-000000000000
+Authorization: {{auth}}
+
+###

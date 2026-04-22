@@ -1,0 +1,54 @@
+## .NET / C#
+bin/
+obj/
+*.user
+*.suo
+.vs/
+*.swp
+*.DS_Store
+
+## Build artifacts
+[Bb]uild/
+[Rr]elease/
+[Dd]ebug/
+publish/
+
+## NuGet
+*.nupkg
+*.snupkg
+.nuget/
+packages/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## Test results
+TestResults/
+coverage/
+*.trx
+*.coveragexml
+
+## Secrets / environment
+appsettings.*.json
+!appsettings.json
+!appsettings.Development.json
+.env
+.env.*
+secrets.json
+
+## Rider / JetBrains
+.idea/
+*.sln.iml
+
+## Visual Studio Code
+.vscode/
+
+## Logs
+*.log
+logs/
+
+## Docker
+.dockerignore
+
+## OS
+Thumbs.db
