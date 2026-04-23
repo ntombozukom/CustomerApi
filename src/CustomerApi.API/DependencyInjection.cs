@@ -59,7 +59,8 @@ public static class DependencyInjection
     public static WebApplication UsePresentation(this WebApplication app)
     {
         app.UseExceptionHandler();
-        app.UseHttpsRedirection();
+        if (!app.Environment.IsDevelopment())
+            app.UseHttpsRedirection();
         app.UseMiddleware<BasicAuthMiddleware>();
 
         if (app.Environment.IsDevelopment())
