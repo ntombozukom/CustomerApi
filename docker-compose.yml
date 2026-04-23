@@ -8,12 +8,14 @@ services:
     ports:
       - "8080:8080"
     environment:
-      ASPNETCORE_ENVIRONMENT: Production
-      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=customerapi;Username=postgres;Password=postgres"
+      ASPNETCORE_ENVIRONMENT: Development
+      ConnectionStrings__DefaultConnection: "Host=db;Port=5432;Database=customerapi;Username=postgres;Password=${DB_PASSWORD:-postgres}"
       ConnectionStrings__Redis: "redis:6379"
-      BasicAuth__Username: "admin"
-      BasicAuth__Password: "Admin@123"
-      Encryption__Key: "your-strong-32-char-encryption-key"
+      BasicAuth__Username: "${AUTH_USERNAME:-admin}"
+      BasicAuth__Password: "${AUTH_PASSWORD:-Admin@123}"
+      Encryption__Key: "${ENCRYPTION_KEY:-dev-only-change-in-production}"
+      Swagger__Title: "Customer API"
+      Swagger__ContactName: "Zuko Malanti"
     depends_on:
       db:
         condition: service_healthy
@@ -29,7 +31,7 @@ services:
     environment:
       POSTGRES_DB: customerapi
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: "${DB_PASSWORD:-postgres}"
     volumes:
       - postgres-data:/var/lib/postgresql/data
     ports:

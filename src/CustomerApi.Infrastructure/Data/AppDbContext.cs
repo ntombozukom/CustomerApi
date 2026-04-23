@@ -62,7 +62,7 @@ public sealed class AppDbContext(DbContextOptions<AppDbContext> options, IConfig
 
             entity.Property(e => e.Age).IsRequired();
             entity.Property(e => e.CreatedAt).IsRequired();
-            entity.Property(e => e.UpdatedAt).IsRequired();
+            entity.Property(e => e.UpdatedAt).IsRequired(false);
 
             entity.ToTable("customers");
         });

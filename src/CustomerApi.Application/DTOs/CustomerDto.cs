@@ -7,4 +7,4 @@ public sealed record CustomerDto(
     string Email,
     int Age,
     DateTime CreatedAt,
-    DateTime UpdatedAt);
+    DateTime? UpdatedAt);

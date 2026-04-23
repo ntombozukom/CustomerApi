@@ -8,7 +8,7 @@ public sealed class Customer
     public string Email { get; set; } = string.Empty;
     public int Age { get; set; }
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
-    public DateTime UpdatedAt { get; set; } = DateTime.UtcNow;
+    public DateTime? UpdatedAt { get; set; }
     public string FirstNameHash { get; set; } = string.Empty;
     public string LastNameHash { get; set; } = string.Empty;
     public string EmailHash { get; set; } = string.Empty;
