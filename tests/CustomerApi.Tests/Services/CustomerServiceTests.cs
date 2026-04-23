@@ -133,6 +133,22 @@ public sealed class CustomerServiceTests
         await act.Should().ThrowAsync<CustomerNotFoundException>();
     }
 
+    [Theory]
+    [InlineData("", "Doe", "jane@example.com", 30)]
+    [InlineData("Jane", "", "jane@example.com", 30)]
+    [InlineData("Jane", "Doe", "not-an-email", 30)]
+    [InlineData("Jane", "Doe", "jane@example.com", 17)]
+    [InlineData("Jane", "Doe", "jane@example.com", 121)]
+    public async Task UpdateAsync_WithInvalidInput_ThrowsValidationException(
+        string firstName, string lastName, string email, int age)
+    {
+        var request = new UpdateCustomerRequest(firstName, lastName, email, age);
+
+        var act = () => _customerService.UpdateAsync(Guid.NewGuid(), request);
+
+        await act.Should().ThrowAsync<ValidationException>();
+    }
+
     [Fact]
     public async Task UpdateAsync_WithEmailAlreadyTakenByAnother_ThrowsDuplicateEmailException()
     {
