@@ -1,7 +1,5 @@
 using CustomerApi.API.Middleware;
 using CustomerApi.API.Options;
-using CustomerApi.Infrastructure.Data;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
@@ -72,29 +70,6 @@ public static class DependencyInjection
                 options.RoutePrefix = SwaggerRoutePrefix;
                 options.DisplayRequestDuration();
             });
-        }
-
-        return app;
-    }
-    public static WebApplication MigrateDatabase(this WebApplication app)
-    {
-        if (!app.Configuration.GetValue("Database:AutoMigrate", defaultValue: false))
-            return app;
-
-        using var scope = app.Services.CreateScope();
-        var logger = scope.ServiceProvider.GetRequiredService<ILogger<AppDbContext>>();
-        var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-
-        try
-        {
-            logger.LogInformation("Applying database migrations...");
-            db.Database.Migrate();
-            logger.LogInformation("Database migrations applied successfully.");
-        }
-        catch (Exception ex)
-        {
-            logger.LogCritical(ex, "Failed to apply database migrations.");
-            throw;
         }
 
         return app;
